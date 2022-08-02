@@ -3701,6 +3701,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.System.Exps.viewportbottom,
 		C3.Plugins.Sprite.Exps.Y,
+		C3.Plugins.System.Exps.viewporttop,
+		C3.Plugins.System.Cnds.Every,
+		C3.Plugins.System.Exps.random,
 		C3.Plugins.Sprite.Exps.Height,
 		C3.Plugins.System.Cnds.TriggerOnce,
 		C3.Plugins.Sprite.Cnds.CompareFrame,
@@ -3863,8 +3866,28 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => (n0.ExpObject() - (f1(0) / 4));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => (n0.ExpObject() - n1.ExpObject(2));
+		},
+		() => 10,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(4, 6);
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpObject() - n1.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() + 200) + n1.ExpObject());
 		},
 		() => "",
 		p => {
